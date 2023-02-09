@@ -1,6 +1,7 @@
 import { Auth } from "../interfaces/auth.interface"
 import { User } from "../interfaces/user.interface"
 import UserModel from "../models/User"
+import { generateToker } from "../utils/jwt.handle"
 import { encrypt, verify } from "../utils/passwordHandle"
 
 
@@ -21,16 +22,13 @@ const registerNewUser = async ({ name, email, password }: User) => {
 
 const loginuser = async ({ email, password }: Auth) => {
     const checkIs = await UserModel.findOne({ email })
-
     if (!checkIs) return "NOT_FOUND_USER"
-
     const passwordHash = checkIs.password // encriptado
-
     const isCorrect = await verify(password, passwordHash)
-
     if (!isCorrect) return "PASSWORD_INCORRECT"
+    const token = generateToker(checkIs.email)
 
-    return checkIs
+    return token
 }
 
 export { registerNewUser, loginuser }
