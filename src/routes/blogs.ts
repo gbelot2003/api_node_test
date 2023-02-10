@@ -1,12 +1,12 @@
-import { Router, Response, Request } from "express"
+import { Router } from "express"
+import { getBlogs } from "../controllers/blogs";
+import { session } from "../middleware/session";
 
 const router = Router();
 
 /**
  * http://localhost:3000/blogs
  */
-router.get('/', (req:Request, res:Response) => {
-    res.send({data: "AQUI VAN LOS MODELOS"})
-})
+router.get('/', session, getBlogs)
 
-export {router}
+export { router }

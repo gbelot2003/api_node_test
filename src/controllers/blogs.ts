@@ -9,9 +9,11 @@ const getItem = (req: Request, res: Response) => {
     }
 }
 
-const getItems = (req: Request, res: Response) => {
+const getBlogs = (req: Request, res: Response) => {
     try {
-        res.send("tester")
+        res.send({
+            data: "Solo personal autorizado"
+        })
     } catch (e) {
         handleHttp(res, 'ERROR_GET_BLOGS')
     }
@@ -42,4 +44,4 @@ const deleteItem = (req: Request, res: Response) => {
 }
 
 
-export { getItem, getItems, updateItem, postItem, deleteItem }
+export { getItem, getBlogs, updateItem, postItem, deleteItem }
