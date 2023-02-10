@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express"
+import { RequestUser } from "../interfaces/RequestUser.interface"
 import { verifyToken } from "../utils/jwt.handle"
 
-const session = (req: Request, res: Response, next: NextFunction) => {
+const session = (req: RequestUser, res: Response, next: NextFunction) => {
     try {
 
         const JWTByUser = req.headers.authorization || ''
@@ -11,7 +12,7 @@ const session = (req: Request, res: Response, next: NextFunction) => {
             res.status(401)
             res.send("NO_VALID_SESSION")
         } else {
-
+            req.user = isUser
             next()
         }
 

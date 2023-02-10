@@ -1,4 +1,5 @@
 import { Request, Response } from "express"
+import { RequestUser } from "../interfaces/RequestUser.interface"
 import { handleHttp } from "../utils/error.handle"
 
 const getItem = (req: Request, res: Response) => {
@@ -9,10 +10,11 @@ const getItem = (req: Request, res: Response) => {
     }
 }
 
-const getBlogs = (req: Request, res: Response) => {
+const getBlogs = (req: RequestUser, res: Response) => {
     try {
         res.send({
-            data: "Solo personal autorizado"
+            data: "Solo personal autorizado",
+            user: req.user
         })
     } catch (e) {
         handleHttp(res, 'ERROR_GET_BLOGS')
