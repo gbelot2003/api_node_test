@@ -1,5 +1,6 @@
 import { Router, Response, Request } from "express"
 import { deleteItem, getItem, getItems, postItem, updateItem } from "../controllers/item";
+import { logMiddleware } from "../middleware/log";
 
 const router = Router();
 
@@ -7,7 +8,7 @@ const router = Router();
  * GET
  * /item/
  */
-router.get("/", getItems)
+router.get("/", logMiddleware, getItems)
 
 /**
  * GET
